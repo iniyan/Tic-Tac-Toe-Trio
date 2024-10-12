@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Trio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tic Tac Toe Trio</h1>
+            <button id="help-button" class="btn-icon" aria-label="Help">?</button>
+        </div>
+        <div id="setup-screen" class="screen">
+            <input type="text" id="player-name" placeholder="Enter your name">
+            <select id="series-length">
+                <option value="1">1 Game</option>
+                <option value="3">3 Game Series</option>
+                <option value="5">5 Game Series</option>
+                <option value="10">10 Game Series</option>
+            </select>
+            <button id="start-series" class="btn btn-primary">Start Series</button>
+        </div>
+        <div id="game-screen" class="screen">
+            <div id="progress-bars">
+                <div class="progress-bar" id="player-progress">
+                    <div class="progress-info">
+                        <span class="player-name"></span>
+                        <span class="progress-text"></span>
+                    </div>
+                    <div class="progress"></div>
+                </div>
+                <div class="progress-bar" id="blocker-progress">
+                    <div class="progress-info">
+                        <span class="player-name">Blocker</span>
+                        <span class="progress-text"></span>
+                    </div>
+                    <div class="progress"></div>
+                </div>
+                <div class="progress-bar" id="hunter-progress">
+                    <div class="progress-info">
+                        <span class="player-name">Hunter</span>
+                        <span class="progress-text"></span>
+                    </div>
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div id="game-progress"></div>
+            <div id="game-board"></div>
+            <div id="status"></div>
+            <div id="controls">
+                <button id="new-game" class="btn btn-secondary">New Game</button>
+                <button id="new-series" class="btn btn-secondary">New Series</button>
+            </div>
+        </div>
+    </div>
+    <div id="series-stats" class="modal">
+        <div class="modal-content">
+            <h2>Series Results</h2>
+            <p id="series-winner"></p>
+            <p id="player-wins"></p>
+            <p id="blocker-wins"></p>
+            <p id="hunter-wins"></p>
+            <button id="close-stats" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <h2>Game Rules</h2>
+            <h3>Basic Rules</h3>
+<ul>
+    <li>The game is played on a 5x5 grid.</li>
+    <li>Players take turns placing their symbol (X, O, or N) in empty cells.</li>
+    <li>The goal is to create one of the following winning patterns:
+        <ul>
+            <li>4 in a row (horizontally, vertically, or diagonally)</li>
+            <li>A 2x2 square of the same symbol</li>
+        </ul>
+    </li>
+    <li>The first player to create a winning pattern wins the game.</li>
+    <li>If all cells are filled and no player has won, the game is a draw.</li>
+</ul>
+            <h3>Series Rules</h3>
+            <ul>
+                <li>Players can choose to play a series of games: 1, 3, 5, or 10 games.</li>
+                <li>The player (X) competes against two AI opponents: Blocker (O) and Hunter (N).</li>
+                <li>Each game in the series is played independently.</li>
+                <li>The winner of each game earns a point.</li>
+                <li>At the end of the series, the player with the most points wins the series.</li>
+                <li>In case of a tie, the series is declared a draw.</li>
+            </ul>
+            <button id="close-rules" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+    <script type="module" src="game.js"></script>
+</body>
+</html>
