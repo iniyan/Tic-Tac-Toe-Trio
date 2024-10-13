@@ -275,19 +275,23 @@ input[type="text"], select {
 }
 
 .cell.player-x {
-    color: #4CAF50;
+    background-color: #4CAF50;
+    color: #f5f5f5;
 }
 
 .cell.player-o {
-    color: #FFC107;
+    background-color: #FFC107;
+    color: #f5f5f5;
 }
 
 .cell.player-n {
-    color: #2196F3;
+    background-color: #2196F3;
+    color: #f5f5f5;
 }
 
 .cell.winning-cell {
-    background-color: #faf9e2;
+    background-color: #c99ef6;
+    color:#333;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
     transform: scale(1.05);
 }

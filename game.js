@@ -5,9 +5,9 @@ import { checkWinner } from './gameLogic.js';
 import { botMove } from './botLogic.js';
 
 let currentPlayer = 'X';
-let gameMode = 'hard'; // 'easy' or 'hard'
+let gameMode = 'medium'; // 'easy', 'medium', or 'hard'
 let board = Array(25).fill('');
-let seriesStats = { X: 0, O: 0, N: 0 }; // Initialize scores
+let seriesStats = { X: 0, O: 0, N: 0 };
 let currentGame = 1;
 let MAX_GAMES = 10;
 
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('close-stats').addEventListener('click', closeStats);
     document.getElementById('help-button').addEventListener('click', showRules);
     document.getElementById('close-rules').addEventListener('click', hideRules);
+    document.getElementById('abandon-series').addEventListener('click', abandonSeries);
 
     initializeBoard(playTurn);
     showSetupScreen();
@@ -35,7 +36,8 @@ function showGameScreen() {
 
 function startNewSeries() {
     MAX_GAMES = parseInt(document.getElementById('series-length').value);
-    seriesStats = { X: 0, O: 0, N: 0 }; // Reset scores
+    gameMode = document.getElementById('difficulty').value;
+    seriesStats = { X: 0, O: 0, N: 0 };
     currentGame = 1;
     updateProgressBars();
     startNewGame();
@@ -56,7 +58,6 @@ function startNewGame() {
     document.getElementById('status').textContent = '';
     updateGameProgress();
     
-    // Remove winning-cell class from all cells
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
         cell.classList.remove('winning-cell');
@@ -77,7 +78,7 @@ function updateProgressBar(id, wins) {
     const progressBar = document.querySelector(`#${id} .progress`);
     const progressText = document.querySelector(`#${id} .progress-text`);
     if (progressBar && progressText) {
-        const width = (wins / MAX_GAMES) * 100; // Calculate percentage
+        const width = (wins / MAX_GAMES) * 100;
         progressBar.style.width = `${width}%`;
         progressText.textContent = wins.toString();
     } else {
@@ -86,21 +87,19 @@ function updateProgressBar(id, wins) {
 }
 
 export function playTurn(index) {
-    if (currentGame > MAX_GAMES) return; // Series is over
+    if (currentGame > MAX_GAMES) return;
     if (board[index] === '') {
         board[index] = currentPlayer;
         updateBoard(board);
         
         const { winner, pattern } = checkWinner(board);
-        console.log(`Current board: ${board}`); // Debugging line
-        console.log(`Winner after move: ${winner}`); // Debugging line
 
         if (winner) {
             handleWin(winner, pattern);
         } else {
             currentPlayer = getNextPlayer(currentPlayer);
             if (currentPlayer !== 'X') {
-                setTimeout(() => botMove(board, currentPlayer, gameMode, playTurn), 500);
+                botMove(board, currentPlayer, gameMode, playTurn);
             }
         }
     } else {
@@ -109,24 +108,13 @@ export function playTurn(index) {
 }
 
 function handleWin(winner, pattern) {
-    console.log(`Winner detected: ${winner}`); // Debugging line
-
     if (winner === 'draw') {
         handleDraw();
     } else {
-        // Update the score based on the winner
         seriesStats[winner] += 1;
-
-        // Update the progress bars
         updateProgressBars();
-
-        // Show the winning message
         document.getElementById('status').textContent = `${getPlayerName(winner)} wins!`;
-
-        // Highlight the winning pattern
         highlightWinningPattern(pattern);
-
-        // Delay before starting a new game
         setTimeout(() => {
             if (currentGame >= MAX_GAMES) {
                 endSeries();
@@ -134,14 +122,12 @@ function handleWin(winner, pattern) {
                 currentGame++;
                 startNewGame();
             }
-        }, 3000); // 3 seconds delay
+        }, 3000);
     }
 }
 
 function handleDraw() {
     document.getElementById('status').textContent = 'It\'s a draw!';
-
-    // Delay before starting a new game
     setTimeout(() => {
         if (currentGame >= MAX_GAMES) {
             endSeries();
@@ -149,7 +135,7 @@ function handleDraw() {
             currentGame++;
             startNewGame();
         }
-    }, 3000); // 3 seconds delay
+    }, 3000);
 }
 
 function highlightWinningPattern(pattern) {
@@ -170,10 +156,8 @@ function endSeries() {
     document.getElementById('series-stats').style.display = 'flex';
     
     if (winners.length > 1) {
-        // It's a tie
         document.getElementById('series-winner').textContent = "Series Result: It's a draw!";
     } else {
-        // We have a single winner
         const seriesWinner = winners[0];
         document.getElementById('series-winner').textContent = `Series Winner: ${getPlayerName(seriesWinner)}`;
     }
@@ -231,4 +215,9 @@ function showRules() {
 function hideRules() {
     const rulesModal = document.getElementById('rules-modal');
     rulesModal.style.display = 'none';
+}
+
+function abandonSeries() {
+    alert('Series abandoned.');
+    showSetupScreen();
 }

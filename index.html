@@ -5,57 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe Trio</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Tic Tac Toe Trio</h1>
-            <button id="help-button" class="btn-icon" aria-label="Help">?</button>
+            <button id="help-button" class="btn-icon">?</button>
         </div>
+
         <div id="setup-screen" class="screen">
-            <input type="text" id="player-name" placeholder="Enter your name">
+            <input type="text" id="player-name" placeholder="Enter your name" required>
             <select id="series-length">
-                <option value="1">1 Game</option>
+                <option value="1">1 Game Series</option>
                 <option value="3">3 Game Series</option>
                 <option value="5">5 Game Series</option>
                 <option value="10">10 Game Series</option>
             </select>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
             <button id="start-series" class="btn btn-primary">Start Series</button>
         </div>
+
         <div id="game-screen" class="screen">
             <div id="progress-bars">
-                <div class="progress-bar" id="player-progress">
+                <div id="player-progress" class="progress-bar">
                     <div class="progress-info">
                         <span class="player-name"></span>
-                        <span class="progress-text"></span>
+                        <span class="progress-text">0</span>
                     </div>
                     <div class="progress"></div>
                 </div>
-                <div class="progress-bar" id="blocker-progress">
+                <div id="blocker-progress" class="progress-bar">
                     <div class="progress-info">
                         <span class="player-name">Blocker</span>
-                        <span class="progress-text"></span>
+                        <span class="progress-text">0</span>
                     </div>
                     <div class="progress"></div>
                 </div>
-                <div class="progress-bar" id="hunter-progress">
+                <div id="hunter-progress" class="progress-bar">
                     <div class="progress-info">
                         <span class="player-name">Hunter</span>
-                        <span class="progress-text"></span>
+                        <span class="progress-text">0</span>
                     </div>
                     <div class="progress"></div>
                 </div>
             </div>
+
             <div id="game-progress"></div>
             <div id="game-board"></div>
             <div id="status"></div>
             <div id="controls">
                 <button id="new-game" class="btn btn-secondary">New Game</button>
-                <button id="new-series" class="btn btn-secondary">New Series</button>
+                <button id="abandon-series" class="btn btn-secondary">Abandon Series</button>
+                <button id="new-series" class="btn btn-primary">New Series</button>
             </div>
         </div>
     </div>
+
     <div id="series-stats" class="modal">
         <div class="modal-content">
             <h2>Series Results</h2>
@@ -66,22 +75,23 @@
             <button id="close-stats" class="btn btn-primary">Close</button>
         </div>
     </div>
+
     <div id="rules-modal" class="modal">
         <div class="modal-content">
             <h2>Game Rules</h2>
             <h3>Basic Rules</h3>
-<ul>
-    <li>The game is played on a 5x5 grid.</li>
-    <li>Players take turns placing their symbol (X, O, or N) in empty cells.</li>
-    <li>The goal is to create one of the following winning patterns:
-        <ul>
-            <li>4 in a row (horizontally, vertically, or diagonally)</li>
-            <li>A 2x2 square of the same symbol</li>
-        </ul>
-    </li>
-    <li>The first player to create a winning pattern wins the game.</li>
-    <li>If all cells are filled and no player has won, the game is a draw.</li>
-</ul>
+            <ul>
+                <li>The game is played on a 5x5 grid.</li>
+                <li>Players take turns placing their symbol (X, O, or N) in empty cells.</li>
+                <li>The goal is to create one of the following winning patterns:
+                    <ul>
+                        <li>4 in a row (horizontally, vertically, or diagonally)</li>
+                        <li>A 2x2 square of the same symbol</li>
+                    </ul>
+                </li>
+                <li>The first player to create a winning pattern wins the game.</li>
+                <li>If all cells are filled and no player has won, the game is a draw.</li>
+            </ul>
             <h3>Series Rules</h3>
             <ul>
                 <li>Players can choose to play a series of games: 1, 3, 5, or 10 games.</li>
@@ -94,6 +104,7 @@
             <button id="close-rules" class="btn btn-primary">Close</button>
         </div>
     </div>
+
     <script type="module" src="game.js"></script>
 </body>
 </html>

@@ -2,14 +2,22 @@ import { checkWinner } from './gameLogic.js';
 
 export function botMove(board, player, mode, playTurnCallback) {
     let move;
-    if (mode === 'easy' || Math.random() < 0.1) { // 10% chance of making a random move even in hard mode
-        move = easyBotMove(board);
-    } else {
-        move = smartMove(board, player);
+    switch (mode) {
+        case 'easy':
+            move = easyBotMove(board);
+            break;
+        case 'medium':
+            move = Math.random() < 0.5 ? easyBotMove(board) : smartMove(board, player);
+            break;
+        case 'hard':
+            move = smartMove(board, player);
+            break;
+        default:
+            move = easyBotMove(board);
     }
     
     if (move !== undefined) {
-        setTimeout(() => playTurnCallback(move), 500);
+        playTurnCallback(move);
     }
 }
 
