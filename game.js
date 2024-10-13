@@ -1,5 +1,4 @@
 console.log('Game script loaded');
-import { Analytics } from "@vercel/analytics/react";
 import { initializeBoard, updateBoard } from './board.js';
 import { checkWinner } from './gameLogic.js';
 import { botMove } from './botLogic.js';
