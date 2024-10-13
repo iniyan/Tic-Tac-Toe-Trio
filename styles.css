@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #F1EFE6;
     overflow: hidden;
 }
 
@@ -28,37 +28,22 @@ body {
     border-radius: 0 0 10px 10px; /* Apply border radius only to bottom corners */
 }
 
-.game-header {
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
-    width: 100%; /* Added to ensure full width for centering */
-}
-
-.game-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: 800;
-}
-
-.game-header span {
-    font-size: 1.8rem;
-    font-weight: 300;
-    margin-left: 0.5rem;
-}
-
 h1 {
     color: #333;
     margin-bottom: 1rem;
     margin: 0;
 }
 
+h2 {
+    font-family: 'Arial', sans-serif; /* Change to a different font for h2 */
+    font-size: 1.2rem; /* Adjust font size for h2 */
+    color: #666; /* Change color for h2 to follow hierarchy */
+}
+
 .screen {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 1rem;
     flex-grow: 1;
 }
 
@@ -149,13 +134,13 @@ input[type="text"], select {
 
 #game-board {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    grid-template-columns: repeat(5, 1fr); /* Ensure equal spacing in grid layout */
+    gap: 0; /* Removed gap to eliminate spacing between cells */
     margin-bottom: 1rem;
 }
 
 .cell {
-    width: 100%;
+    width: 100%; /* Cell width reverted back to 100% */
     aspect-ratio: 1;
     border: 1px solid #ccc;
     display: flex;
@@ -165,6 +150,7 @@ input[type="text"], select {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+    /* Removed margin and padding */
 }
 
 .cell:hover {
@@ -189,7 +175,7 @@ input[type="text"], select {
 .cell.winning-cell {
     background-color: #c99ef6;
     color:#333;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    box-shadow: 0 0 10px rgba(110, 253, 144, 0.7);
     transform: scale(1.05);
 }
 
@@ -286,7 +272,7 @@ input[type="text"], select {
     align-items: center;
     margin: 0 auto; /* Center the header */
     margin-bottom: 1rem; /* Remove margin if needed */
-    /* border-bottom: 5px solid; */ /* Removed border bottom from title */
+    flex-direction: column; /* Change to column to stack h1 and h2 */
 }
 
 .btn-icon {
