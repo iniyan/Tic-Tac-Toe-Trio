@@ -1,11 +1,12 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Avenir', sans-serif; /* Modern and elegant font suggestion */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    overflow: hidden;
 }
 
 .container {
@@ -16,7 +17,36 @@ body {
     text-align: center;
     width: 100%;
     max-width: 400px;
-    position: relative;
+    position: relative; /* Ensure the container is positioned relative for absolute positioning of the button */
+    height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border-top: 5px solid; /* Top border */
+    border-image: linear-gradient(to right, #4CAF50 0%, #4CAF50 33%, #FFC107 33%, #FFC107 66%, #2196F3 66%, #2196F3 100%) 1; /* Stacked colors for top border */
+    border-bottom: 5px solid; /* Bottom border */
+    border-radius: 0 0 10px 10px; /* Apply border radius only to bottom corners */
+}
+
+.game-header {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    width: 100%; /* Added to ensure full width for centering */
+}
+
+.game-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.game-header span {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-left: 0.5rem;
 }
 
 h1 {
@@ -28,7 +58,8 @@ h1 {
 .screen {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.3rem;
+    flex-grow: 1;
 }
 
 #setup-screen {
@@ -45,16 +76,18 @@ input[type="text"], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .btn {
     padding: 0.5rem 1rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: bold;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
 }
 
 .btn-primary {
@@ -95,12 +128,24 @@ input[type="text"], select {
     font-weight: bold;
 }
 
+.player-symbol {
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
 .progress {
     height: 10px;
-    background-color: #4CAF50;
     width: 0;
     transition: width 0.3s ease-in-out;
 }
+
+.player-name {
+    text-transform: capitalize;
+}
+
+#player-progress .progress { background-color: #4CAF50; }
+#blocker-progress .progress { background-color: #FFC107; }
+#hunter-progress .progress { background-color: #2196F3; }
 
 #game-board {
     display: grid;
@@ -108,154 +153,6 @@ input[type="text"], select {
     gap: 5px;
     margin-bottom: 1rem;
 }
-
-.cell {
-    width: 100%;
-    aspect-ratio: 1;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.cell:hover {
-    background-color: #f0f0f0;
-}
-
-.cell.player-x {
-    color: #4CAF50;
-}
-
-.cell.player-o {
-    color: #FFC107;
-}
-
-.cell.player-n {
-    color: #2196F3;
-}
-
-#status {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-top: 1rem;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    background-color: white;
-    color: black; /* Ensure text is visible */
-    border: 2px solid red; /* Temporary, to see the content boundaries */
-}
-
-#controls {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-}
-
-#game-progress {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-@keyframes confetti-fall {
-    0% { transform: translateY(-100%) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(720deg); }
-}
-
-.confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #f0f0f0;
-    animation: confetti-fall 4s linear infinite;
-}
-
-.confetti.red { background-color: #FF5252; }
-.confetti.blue { background-color: #448AFF; }
-.confetti.green { background-color: #69F0AE; }
-.confetti.yellow { background-color: #FFD740; }
-
-#rules-modal .modal-content {
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-#rules-modal h2 {
-    color: #2196F3;
-    margin-bottom: 1rem;
-}
-
-#rules-modal h3 {
-    color: #4CAF50;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-#rules-modal ul {
-    padding-left: 20px;
-    margin-bottom: 1rem;
-}
-
-#rules-modal li {
-    margin-bottom: 0.5rem;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.btn-icon {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s;
-    padding: 0;
-    line-height: 1;
-}
-
-.btn-icon:hover {
-    background-color: #1e87db;
-}
-
-/* winning pattern */
 
 .cell {
     width: 100%;
@@ -296,3 +193,137 @@ input[type="text"], select {
     transform: scale(1.05);
 }
 
+#status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 360px;
+    width: 90%;
+    max-height: 90vh; /* Increased max-height to allow more content without scrolling */
+    overflow-y: auto; /* Keep this to allow scrolling if content exceeds max-height */
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    animation: modalAppear 0.5s ease-out;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem; /* Added gap between buttons */
+}
+
+#game-progress {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+#rules-modal .modal-content {
+    max-width: 360px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#rules-modal h2 {
+    color: #2196F3;
+    margin-bottom: 1rem;
+}
+
+#rules-modal h3 {
+    color: #4CAF50;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#rules-modal ul {
+    padding-left: 20px;
+    margin-bottom: 1rem;
+}
+
+#rules-modal li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem; /* Reduced font size */
+    line-height: 1.5; /* Increased line height */
+    color: #555; /* Changed the color to reduce the blackness */
+}
+
+.header {
+    font-family: 'Source Sans Pro', sans-serif; /* Trying a slim and stylish font */
+    display: flex;
+    justify-content: center; /* Align to center */
+    align-items: center;
+    margin: 0 auto; /* Center the header */
+    margin-bottom: 1rem; /* Remove margin if needed */
+    /* border-bottom: 5px solid; */ /* Removed border bottom from title */
+}
+
+.btn-icon {
+    position: absolute; /* Position the button absolutely */
+    top: 10px; /* Adjust the top position */
+    right: 10px; /* Adjust the right position */
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+    padding: 0;
+    line-height: 1;
+}
+
+.btn-icon:hover {
+    background-color: #cee8fe;
+}
+
+#series-stats h2 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+#series-stats p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+#close-stats {
+    margin-top: 1rem;
+}

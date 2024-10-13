@@ -85,7 +85,6 @@ function updateProgressBar(id, wins) {
         console.error(`Progress bar not found: ${id}`);
     }
 }
-
 export function playTurn(index) {
     if (currentGame > MAX_GAMES) return;
     if (board[index] === '') {
@@ -165,34 +164,11 @@ function endSeries() {
     document.getElementById('player-wins').textContent = `${getPlayerName('X')} wins: ${seriesStats.X}`;
     document.getElementById('blocker-wins').textContent = `Blocker wins: ${seriesStats.O}`;
     document.getElementById('hunter-wins').textContent = `Hunter wins: ${seriesStats.N}`;
-    
-    createConfetti();
 }
 
 function closeStats() {
     document.getElementById('series-stats').style.display = 'none';
-    const confetti = document.querySelectorAll('.confetti');
-    confetti.forEach(c => c.remove());
     showSetupScreen();
-}
-
-function createConfetti() {
-    const confettiCount = 100;
-    const colors = ['red', 'blue', 'green', 'yellow'];
-    const container = document.querySelector('.modal-content');
-
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti', colors[Math.floor(Math.random() * colors.length)]);
-        confetti.style.left = `${Math.random() * 100}%`;
-        confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
-        confetti.style.animationDelay = `${Math.random() * 2}s`;
-        container.appendChild(confetti);
-
-        confetti.addEventListener('animationiteration', () => {
-            confetti.remove();
-        });
-    }
 }
 
 function getPlayerName(player) {
