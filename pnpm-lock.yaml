@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@capacitor/android':
+        specifier: ^6.1.2
+        version: 6.1.2(@capacitor/core@6.1.2)
       '@capacitor/cli':
         specifier: ^6.1.2
         version: 6.1.2
       '@capacitor/core':
         specifier: ^6.1.2
         version: 6.1.2
+      '@capacitor/ios':
+        specifier: ^6.1.2
+        version: 6.1.2(@capacitor/core@6.1.2)
       '@vercel/analytics':
         specifier: ^1.3.1
         version: 1.3.1
@@ -24,6 +30,11 @@ importers:
 
 packages:
 
+  '@capacitor/android@6.1.2':
+    resolution: {integrity: sha512-Yh0gQDY1bgRrL25J6ecIlvvs2kF8iNSwIPXjyw6Yz9mnwYxBazF5KZbjpKtGPnJgicJhFkYGsqOkEtxrve0EoQ==}
+    peerDependencies:
+      '@capacitor/core': ^6.1.0
+
   '@capacitor/cli@6.1.2':
     resolution: {integrity: sha512-HKCNGE0RP8U7aiEF2vg5wTivJROS8BVfu8a3yYJb1mRQvzv+czpmtHNsTWS/WukvwoxUjyjRmsNQSAACHfMTmQ==}
     engines: {node: '>=18.0.0'}
@@ -31,6 +42,11 @@ packages:
 
   '@capacitor/core@6.1.2':
     resolution: {integrity: sha512-xFy1/4qLFLp5WCIzIhtwUuVNNoz36+V7/BzHmLqgVJcvotc4MMjswW/TshnPQaLLujEOaLkA4h8ZJ0uoK3ImGg==}
+
+  '@capacitor/ios@6.1.2':
+    resolution: {integrity: sha512-HaeW68KisBd/7TmavzPDlL2bpoDK5AjR2ZYrqU4TlGwM88GtQfvduBCAlSCj20X0w/4+rWMkseD9dAAkacjiyQ==}
+    peerDependencies:
+      '@capacitor/core': ^6.1.0
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -700,6 +716,10 @@ packages:
 
 snapshots:
 
+  '@capacitor/android@6.1.2(@capacitor/core@6.1.2)':
+    dependencies:
+      '@capacitor/core': 6.1.2
+
   '@capacitor/cli@6.1.2':
     dependencies:
       '@ionic/cli-framework-output': 2.2.8
@@ -726,6 +746,10 @@ snapshots:
   '@capacitor/core@6.1.2':
     dependencies:
       tslib: 2.7.0
+
+  '@capacitor/ios@6.1.2(@capacitor/core@6.1.2)':
+    dependencies:
+      '@capacitor/core': 6.1.2
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
