@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1040865615991",
+    "project_id": "tictactoetrio-bfe02",
+    "storage_bucket": "tictactoetrio-bfe02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040865615991:android:f566fc68ab2df9d050a672",
+        "android_client_info": {
+          "package_name": "in.iniyan.tictactoetrio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRby-W0P1eStbDUK25eEgCHt1HQV9-xBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

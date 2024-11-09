@@ -321,3 +321,39 @@ input[type="text"], select {
 #close-stats {
     margin-top: 1rem;
 }
+
+.support-button-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.support-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.support-button:hover {
+  background-color: #ff8787;
+  transform: scale(1.1);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.support-button {
+  animation: pulse 2s infinite;
+}
