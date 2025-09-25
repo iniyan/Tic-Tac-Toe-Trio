@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe Trio</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    <script type="module" crossorigin src="/assets/index-BMtMiwC5.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DYuA3PfE.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Tic Tac Toe Trio</h1>
+        <h2>Challenge AI, Think tactically</h2>
+        <button id="help-button" class="btn-icon">!</button>
+      </div>
+      <div id="setup-screen" class="screen">
+        <input
+          type="text"
+          id="player-name"
+          placeholder="Enter your name"
+          required
+        />
+        <select id="series-length">
+          <option value="1">1 Game Series</option>
+          <option value="3">3 Game Series</option>
+          <option value="5">5 Game Series</option>
+          <option value="10">10 Game Series</option>
+        </select>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button id="start-series" class="btn btn-primary">Start Series</button>
+      </div>
+      <div id="game-screen" class="screen">
+        <div id="progress-bars">
+          <div id="player-progress" class="progress-bar">
+            <div class="progress-info">
+              <span class="player-name"></span>
+              <span class="progress-text">0</span>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div id="blocker-progress" class="progress-bar">
+            <div class="progress-info">
+              <span class="player-name">Blocker (O)</span>
+              <span class="progress-text">0</span>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div id="hunter-progress" class="progress-bar">
+            <div class="progress-info">
+              <span class="player-name">Hunter(N)</span>
+              <span class="progress-text">0</span>
+            </div>
+            <div class="progress"></div>
+          </div>
+        </div>
+        <div id="game-progress"></div>
+        <div id="game-board"></div>
+        <div id="status"></div>
+        <div id="controls">
+          <button id="new-game" class="btn btn-secondary">New Game</button>
+          <button id="abandon-series" class="btn btn-secondary">
+            End Series
+          </button>
+          <button id="new-series" class="btn btn-primary">New Series</button>
+        </div>
+      </div>
+    </div>
+    <div id="series-stats" class="modal">
+      <div class="modal-content">
+        <h2>Series Results</h2>
+        <p id="series-winner"></p>
+        <p id="player-wins"></p>
+        <p id="blocker-wins"></p>
+        <p id="hunter-wins"></p>
+        <button id="close-stats" class="btn btn-primary">Close</button>
+      </div>
+    </div>
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <h2>Game Rules</h2>
+        <h3>Basic Rules</h3>
+        <ul>
+          <li>Players place their symbols (X, O, N) in turns.</li>
+          <li>
+            Winning patterns:
+            <ul>
+              <li>4 in a row (horizontal, vertical, diagonal)</li>
+              <li>2x2 square of the same symbol</li>
+            </ul>
+          </li>
+          <li>
+            If no one wins and all cells are filled, the game ends in a draw.
+          </li>
+        </ul>
+        <h3>Series Rules</h3>
+        <ul>
+          <li>Play a series of 1, 3, 5, or 10 games.</li>
+          <li>Player X vs two AI opponents: Blocker (O) and Hunter (N).</li>
+          <li>Each win earns 1 point; most points win the series.</li>
+          <li>A tied series is declared a draw.</li>
+        </ul>
+        <button id="close-rules" class="btn btn-primary">Close</button>
+      </div>
+    </div>
+
+    <!-- Add this button outside of any existing divs to ensure it's always visible -->
+    <a href="https://thamiziniyan.gumroad.com/coffee" target="_blank" rel="noopener noreferrer" class="support-button-link">
+      <button class="support-button" title="Support this game">❤️</button>
+    </a>
+
+  </body>
+</html>
