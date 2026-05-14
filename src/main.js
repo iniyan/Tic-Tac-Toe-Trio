@@ -1,6 +1,15 @@
 import { initializeBoard, updateBoard } from "./board.js";
 import { checkWinner } from "./gameLogic.js";
 import { botMove } from "./botLogic.js";
+import {
+  trackGameStart,
+  trackGameEnd,
+  trackSeriesEnd,
+  trackMove,
+  trackModalOpen,
+  trackButtonClick,
+  trackSeriesAbandoned
+} from "./analytics.js";
 
 let currentPlayer = "X";
 let gameMode = "medium"; // 'easy', 'medium', or 'hard'
@@ -8,15 +17,22 @@ let board = Array(25).fill("");
 let seriesStats = { X: 0, O: 0, N: 0 };
 let currentGame = 1;
 let MAX_GAMES = 10;
+let moveCount = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("start-series")
     .addEventListener("click", startNewSeries);
-  document.getElementById("new-game").addEventListener("click", startNewGame);
+  document.getElementById("new-game").addEventListener("click", () => {
+    trackButtonClick('new_game');
+    startNewGame();
+  });
   document
     .getElementById("new-series")
-    .addEventListener("click", showSetupScreen);
+    .addEventListener("click", () => {
+      trackButtonClick('new_series');
+      showSetupScreen();
+    });
   document.getElementById("close-stats").addEventListener("click", closeStats);
   document.getElementById("help-button").addEventListener("click", showRules);
   document.getElementById("close-rules").addEventListener("click", hideRules);
@@ -43,6 +59,11 @@ function startNewSeries() {
   gameMode = document.getElementById("difficulty").value;
   seriesStats = { X: 0, O: 0, N: 0 };
   currentGame = 1;
+
+  // Track series start
+  trackGameStart(MAX_GAMES, gameMode);
+  trackButtonClick('start_series');
+
   updateProgressBars();
   startNewGame();
   document.getElementById("series-stats").style.display = "none";
@@ -60,6 +81,7 @@ function startNewSeries() {
 function startNewGame() {
   board = Array(25).fill("");
   currentPlayer = "X";
+  moveCount = 0;
   updateBoard(board);
   document.getElementById("status").textContent = "";
   updateGameProgress();
@@ -96,8 +118,12 @@ function updateProgressBar(id, wins) {
 export function playTurn(index) {
   if (currentGame > MAX_GAMES) return;
   if (board[index] === "") {
+    moveCount++;
     board[index] = currentPlayer;
     updateBoard(board);
+
+    // Track the move
+    trackMove(currentPlayer, index, moveCount);
 
     const { winner, pattern } = checkWinner(board);
 
@@ -121,6 +147,8 @@ function handleWin(winner, pattern) {
     handleDraw();
   } else {
     seriesStats[winner] += 1;
+    // Track game end
+    trackGameEnd(winner, currentGame);
     updateProgressBars();
     document.getElementById("status").textContent = `${getPlayerName(
       winner
@@ -138,6 +166,8 @@ function handleWin(winner, pattern) {
 }
 
 function handleDraw() {
+  // Track draw
+  trackGameEnd("draw", currentGame);
   document.getElementById("status").textContent = "It's a draw!";
   setTimeout(() => {
     if (currentGame >= MAX_GAMES) {
@@ -166,13 +196,17 @@ function endSeries() {
     (player) => seriesStats[player] === maxScore
   );
 
+  const seriesWinner = winners.length > 1 ? "draw" : winners[0];
+
+  // Track series end
+  trackSeriesEnd(seriesWinner, MAX_GAMES, seriesStats.X, seriesStats.O, seriesStats.N);
+
   document.getElementById("series-stats").style.display = "flex";
 
   if (winners.length > 1) {
     document.getElementById("series-winner").textContent =
       "Series Result: It's a draw!";
   } else {
-    const seriesWinner = winners[0];
     document.getElementById(
       "series-winner"
     ).textContent = `Series Winner: ${getPlayerName(seriesWinner)}`;
@@ -190,6 +224,7 @@ function endSeries() {
 }
 
 function closeStats() {
+  trackButtonClick('close_stats');
   document.getElementById("series-stats").style.display = "none";
   showSetupScreen();
 }
@@ -208,16 +243,21 @@ function getNextPlayer(player) {
 }
 
 function showRules() {
+  trackModalOpen('rules');
+  trackButtonClick('help_button');
   const rulesModal = document.getElementById("rules-modal");
   rulesModal.style.display = "flex";
 }
 
 function hideRules() {
+  trackButtonClick('close_rules');
   const rulesModal = document.getElementById("rules-modal");
   rulesModal.style.display = "none";
 }
 
 function abandonSeries() {
+  trackSeriesAbandoned(currentGame, MAX_GAMES);
+  trackButtonClick('abandon_series');
   alert("Series abandoned.");
   showSetupScreen();
 }

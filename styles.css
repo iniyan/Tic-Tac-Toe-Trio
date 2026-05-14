@@ -1,43 +1,46 @@
 body {
-    font-family: 'Avenir', sans-serif; /* Modern and elegant font suggestion */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    background-color: #F1EFE6;
-    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow-x: hidden;
+    padding: 1rem;
 }
 
 .container {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 100%;
-    max-width: 400px;
-    position: relative; /* Ensure the container is positioned relative for absolute positioning of the button */
-    height: 90vh;
+    max-width: 420px;
+    position: relative;
+    min-height: 80vh;
+    max-height: 90vh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    border-top: 5px solid; /* Top border */
-    border-image: linear-gradient(to right, #4CAF50 0%, #4CAF50 33%, #FFC107 33%, #FFC107 66%, #2196F3 66%, #2196F3 100%) 1; /* Stacked colors for top border */
-    border-bottom: 5px solid; /* Bottom border */
-    border-radius: 0 0 10px 10px; /* Apply border radius only to bottom corners */
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 1rem;
-    margin: 0;
+    color: #2d3748;
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
 }
 
 h2 {
-    font-family: 'Arial', sans-serif; /* Change to a different font for h2 */
-    font-size: 1.2rem; /* Adjust font size for h2 */
-    color: #666; /* Change color for h2 to follow hierarchy */
+    font-size: 1rem;
+    color: #718096;
+    margin: 0 0 1.5rem 0;
+    font-weight: 400;
 }
 
 .screen {
@@ -56,41 +59,57 @@ h2 {
 }
 
 input[type="text"], select {
-    padding: 0.5rem;
+    padding: 0.75rem 1rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
     width: 100%;
     box-sizing: border-box;
+    background: #f8fafc;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
 }
 
 .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease;
     width: 100%;
+    font-family: inherit;
+    letter-spacing: 0.025em;
 }
 
 .btn-primary {
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .btn-primary:hover {
-    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .btn-secondary {
-    background-color: #2196F3;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
 }
 
 .btn-secondary:hover {
-    background-color: #1e87db;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
 }
 
 #progress-bars {
@@ -102,17 +121,20 @@ input[type="text"], select {
 }
 
 .progress-bar {
-    background-color: #f0f0f0;
-    border-radius: 10px;
+    background-color: rgba(248, 250, 252, 0.8);
+    border-radius: 12px;
     overflow: hidden;
-    flex: 1; /* Added to ensure equal width for each progress bar */
+    flex: 1;
+    border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .progress-info {
     display: flex;
     justify-content: space-between;
-    padding: 0.25rem 0.5rem;
-    font-weight: bold;
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #4a5568;
 }
 
 .player-symbol {
@@ -121,64 +143,82 @@ input[type="text"], select {
 }
 
 .progress {
-    height: 10px;
+    height: 8px;
     width: 0;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0 0 12px 12px;
 }
 
 .player-name {
     text-transform: capitalize;
 }
 
-#player-progress .progress { background-color: #4CAF50; }
-#blocker-progress .progress { background-color: #FFC107; }
-#hunter-progress .progress { background-color: #2196F3; }
+#player-progress .progress { background: linear-gradient(90deg, #48bb78, #38a169); }
+#blocker-progress .progress { background: linear-gradient(90deg, #ed8936, #dd6b20); }
+#hunter-progress .progress { background: linear-gradient(90deg, #4299e1, #3182ce); }
 
 #game-board {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Ensure equal spacing in grid layout */
-    gap: 0; /* Removed gap to eliminate spacing between cells */
-    margin-bottom: 1rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.5);
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .cell {
-    width: 100%; /* Cell width reverted back to 100% */
+    width: 100%;
     aspect-ratio: 1;
-    border: 1px solid #ccc;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
-    /* Removed margin and padding */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .cell:hover {
-    background-color: #f0f0f0;
+    background-color: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cell.player-x {
-    background-color: #4CAF50;
-    color: #f5f5f5;
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
 }
 
 .cell.player-o {
-    background-color: #FFC107;
-    color: #f5f5f5;
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+    color: white;
+    box-shadow: 0 4px 12px rgba(237, 137, 54, 0.3);
 }
 
 .cell.player-n {
-    background-color: #2196F3;
-    color: #f5f5f5;
+    background: linear-gradient(135deg, #4299e1, #3182ce);
+    color: white;
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
 }
 
 .cell.winning-cell {
-    background-color: #c99ef6;
-    color:#333;
-    box-shadow: 0 0 10px rgba(110, 253, 144, 0.7);
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6) !important;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6) !important;
     transform: scale(1.05);
+    animation: winPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes winPulse {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1.1); }
 }
 
 #status {
@@ -201,18 +241,18 @@ input[type="text"], select {
 }
 
 .modal-content {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2rem;
-    border-radius: 10px;
-    max-width: 360px;
+    border-radius: 20px;
+    max-width: 400px;
     width: 90%;
-    max-height: 90vh; /* Increased max-height to allow more content without scrolling */
-    overflow-y: auto; /* Keep this to allow scrolling if content exceeds max-height */
-    background-color: white;
-    color: black;
-    border: 2px solid #4CAF50;
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-    animation: modalAppear 0.5s ease-out;
+    max-height: 85vh;
+    overflow-y: auto;
+    color: #2d3748;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    animation: modalAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes modalAppear {
@@ -268,38 +308,38 @@ input[type="text"], select {
 }
 
 .header {
-    font-family: 'Source Sans Pro', sans-serif; /* Trying a slim and stylish font */
     display: flex;
-    justify-content: center; /* Align to center */
+    justify-content: center;
     align-items: center;
-    margin: 0 auto; /* Center the header */
-    margin-bottom: 1rem; /* Remove margin if needed */
-    flex-direction: column; /* Change to column to stack h1 and h2 */
+    margin: 0 auto 2rem auto;
+    flex-direction: column;
 }
 
 .btn-icon {
-    position: absolute; /* Position the button absolutely */
-    top: 10px; /* Adjust the top position */
-    right: 10px; /* Adjust the right position */
-    background-color: #2196F3;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #4299e1, #3182ce);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    font-size: 16px;
-    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease;
     padding: 0;
     line-height: 1;
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
 }
 
 .btn-icon:hover {
-    background-color: #cee8fe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
 }
 
 #series-stats h2 {
@@ -320,4 +360,40 @@ input[type="text"], select {
 
 #close-stats {
     margin-top: 1rem;
+}
+
+.support-button-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.support-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.support-button:hover {
+  background-color: #ff8787;
+  transform: scale(1.1);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.support-button {
+  animation: pulse 2s infinite;
 }
