@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "in.iniyan.tictactoetrio"
-    compileSdk = 34
+    namespace = "in.iniyan.ttt"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "in.iniyan.tictactoetrio"
+        applicationId = "in.iniyan.ttt"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 3
+        versionName = "1.0.2"
     }
 
     buildTypes {
