@@ -5,3 +5,11 @@ build
 coverage
 
 .env
+
+# Android (native + Capacitor) local-only files
+.DS_Store
+android-native/.gradle/
+android-native/local.properties
+android-native/app/build/
+android-native/build/
+android-native/.kotlin/
